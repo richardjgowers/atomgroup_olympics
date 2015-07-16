@@ -1,8 +1,10 @@
 """Doing AtomGroups as numpy structured arrays
 
-StrucAtomGroup
+ATOMTYPE - a numpy dtype that represents an atom
 
-StrucAtom
+StrucAtomGroup - the new AtomGroup
+
+StrucAtom - the new Atom
 
 """
 import numpy as np
@@ -32,6 +34,15 @@ class StrucAtomGroup(object):
 
     def resids(self):
         return self._atoms['resid']
+
+    def set_names(self, new):
+        self._atoms['name'] = new
+
+    def set_charges(self, new):
+        self._atoms['charge'] = new
+
+    def set_resids(self, new):
+        self._atoms['resid'] = new
 
     def __getitem__(self, item):
         if isinstance(item, int):
@@ -77,4 +88,4 @@ def convert(atomgroup):
     new_ag['mass'] = atomgroup.masses()
     new_ag['charge'] = [a.charge for a in atomgroup]
 
-    return new_ag
+    return StrucAtomGroup(new_ag)
