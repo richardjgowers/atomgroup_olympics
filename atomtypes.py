@@ -30,6 +30,9 @@ class StrucAtomGroup(object):
     def charges(self):
         return self._atoms['charge']
 
+    def set_charges(self, charges):
+        self._atoms['charge'] = charges
+
     def resids(self):
         return self._atoms['resid']
 
