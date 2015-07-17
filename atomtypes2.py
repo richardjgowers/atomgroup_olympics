@@ -43,6 +43,9 @@ class MasterGroup(object):
     def resids(self):
         return self._atoms['resid']
 
+    def resnames(self):
+        return self._atoms['resname']
+
     def set_names(self, new):
         self._atoms['name'] = new
 
@@ -52,12 +55,14 @@ class MasterGroup(object):
     def set_resids(self, new):
         self._atoms['resid'] = new
 
+    def set_resnames(self, new):
+        self._atoms['resname'] = new
+
     def __getitem__(self, item):
         if isinstance(item, int):
             return StrucAtom(item, self._atoms)
         elif isinstance(item, (np.ndarray, slice)):
             return StrucAtomGroup(self._indices[item], self._atoms)
-
 
 
 class StrucAtomGroup(object):
@@ -75,6 +80,9 @@ class StrucAtomGroup(object):
     def resids(self):
         return self._master['resid'][self._atoms]
 
+    def resnames(self):
+        return self._master['resname'][self._atoms]
+
     def set_names(self, new):
         self._master['name'][self._atoms] = new
 
@@ -83,6 +91,9 @@ class StrucAtomGroup(object):
 
     def set_resids(self, new):
         self._master['resid'][self._atoms] = new
+
+    def set_resnames(self, new):
+        self._master['resname'][self._atoms] = new
 
     def __getitem__(self, item):
         if isinstance(item, int):
